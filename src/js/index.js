@@ -38,12 +38,12 @@ class Index {
     var main_item = this.store.markdown_items[0];
     _.defaults(main_item, {date: 'default date', tags: ['default tag1', 'default tag2'], content: 'default content'});
     this.store.main_item = main_item;
+    console.log(main_item.tags);
 
     $.get(`${this.base_url}/${this.store.main_item.path}`, function(data){
       this.store.main_item.content = data;
     }.bind(this));
 
-    // setTimeout(function(){this.store.main_item.content = "foo bar";}.bind(this), 3000);
 
   }
 
