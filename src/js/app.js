@@ -1,34 +1,34 @@
-import 'vis/dist/vis.min.css'
-import vis from 'vis';
+// import 'vis/dist/vis.min.css';
+// import vis from 'vis';
+// import {hljs} from 'highlight';
+// import 'highlight/lib/vendor/highlight.js/styles/github.css'
+import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap'
+// import Md from 'md';
 import $ from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Index from 'index';
+import Store from 'store';
+import Root from 'root';
 
-var app = function() {
-  var nodes = new vis.DataSet([
-    {id: 1, label: 'Linux'},
-    {id: 2, label: 'Networking'},
-    {id: 3, label: 'Business'},
-    {id: 4, label: 'Hobby'},
-    {id: 5, label: 'Programming'}
-  ]);
+class App {
+  constructor() {
+    this.store = new Store();
+    this.base_url = "http://localhost:8003"
+    this.index = new Index(this.base_url, this.store);
+    this.store.base_url = this.base_url;
+  }
 
-  var edges = new vis.DataSet([
-    {from: 1, to: 3},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5},
-  ]);
+  run() {
+    this.index.init();
+    ReactDOM.render(
+      <Root store={this.store} />,
+      $('#app')[0]
+    );
+  }
 
-  var container = document.getElementById('mynetwork');
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {};
-  var network = new vis.Network(container, data, options);
 };
 
-$(document).ready(function() {
-  app();
-});
-
-export default app;
+window.app = new App();
+$(() => app.run());

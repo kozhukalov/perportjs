@@ -13,7 +13,7 @@ module.exports = {
     sourceMapFilename: 'bundle.js.map'
   },
   resolve: {
-    modules: [path.resolve('src'), 'node_modules'],
+    modules: ['src/js', 'node_modules'],
     extensions: ['.js']
   },
   module: {
@@ -25,11 +25,9 @@ module.exports = {
         options: {
           cacheDirectory: true,
           plugins: [
-            ['transform-es2015-classes', {loose: true}],
-            'transform-runtime',
-            'transform-es2015-modules-commonjs'
+            'transform-decorators-legacy',
           ],
-          presets: ['es2015']
+          presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-0']
         }
       },
       {
@@ -48,6 +46,10 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpg)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: ['file-loader']
       },
     ]
