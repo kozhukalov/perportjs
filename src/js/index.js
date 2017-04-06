@@ -30,15 +30,19 @@ class Index {
         this.store.addMenuItem(data[i]);
       }
       else if (data[i].type === 'markdown'){
-        this.store.addMarkdownItem(data[i]);
+        var item = data[i];
+        _.defaults(item, {
+          date: '',
+          tags: [],
+          content: ''
+        });
+        this.store.addMarkdownItem(item);
+
       }
     }
 
 
-    var main_item = this.store.markdown_items[0];
-    _.defaults(main_item, {date: 'default date', tags: ['default tag1', 'default tag2'], content: 'default content'});
-    this.store.main_item = main_item;
-    console.log(main_item.tags);
+    this.store.main_item = this.store.markdown_items[0];
 
     $.get(`${this.base_url}/${this.store.main_item.path}`, function(data){
       this.store.main_item.content = data;
