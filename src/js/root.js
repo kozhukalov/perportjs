@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import Menu from 'menu';
 import Main from 'main';
+import Side from 'side';
 
 @observer
 class Root extends React.Component {
@@ -26,7 +27,7 @@ class Root extends React.Component {
             <Main store={props.store} />
           </div>
           <div className="col-sm-4">
-            side
+            <Side store={props.store} />
           </div>
         </div>
       </div>

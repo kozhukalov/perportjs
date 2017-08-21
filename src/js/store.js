@@ -35,6 +35,10 @@ class Store {
     this.chosen_menu_index = menu_index;
   }
 
+  chooseTag(tag) {
+    this.chosen_tag = tag;
+  }
+
 }
 
 export default Store;

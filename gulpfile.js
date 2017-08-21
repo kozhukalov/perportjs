@@ -29,8 +29,11 @@ gulp.task('build', function(callback) {
     .pipe(replace('__CACHE_BUST__', Date.now()))
     .pipe(gulp.dest('build'));
 
-  gulp.src('src/css/*')
-    .pipe(gulp.dest('build/static'));
+  gulp.src('src/config.yaml')
+    .pipe(gulp.dest('build'))
+
+  // gulp.src('src/css/*')
+  //   .pipe(gulp.dest('build/static'));
 
   callback();
 });

@@ -3,11 +3,12 @@
 // import {hljs} from 'highlight';
 // import 'highlight/lib/vendor/highlight.js/styles/github.css'
 import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap'
-// import Md from 'md';
+import 'css/main.css'
+import yaml from 'js-yaml';
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Config from 'config';
 import Index from 'index';
 import Store from 'store';
 import Root from 'root';
@@ -15,13 +16,16 @@ import Root from 'root';
 class App {
   constructor() {
     this.store = new Store();
-    this.base_url = "http://localhost:8003"
-    this.index = new Index(this.base_url, this.store);
-    this.store.base_url = this.base_url;
+    this.config_url = "/config.yaml";
+    this.config = new Config(this.config_url, this.store);
+    this.index = new Index(this.store);
   }
 
   run() {
-    this.index.init();
+    let config_init = new Promise((onSuccess, onError) => {
+      this.config.init(onSuccess, onError);
+    });
+    config_init.then(() => this.index.init());
     ReactDOM.render(
       <Root store={this.store} />,
       $('#app')[0]

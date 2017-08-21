@@ -13,7 +13,7 @@ module.exports = {
     sourceMapFilename: 'bundle.js.map'
   },
   resolve: {
-    modules: ['src/js', 'node_modules'],
+    modules: ['src/js', 'node_modules', 'src'],
     extensions: ['.js']
   },
   module: {
@@ -35,6 +35,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           use: ['css-loader']
         })
+        // use: ['css-loader']
       },
       {
         test: /\.html$/,
